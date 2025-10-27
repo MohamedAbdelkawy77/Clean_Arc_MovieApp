@@ -14,6 +14,7 @@ class Moviemodel extends Movie {
         Title: Data["title"],
         overview: Data["overview"],
         posterPath: Data["poster_path"],
+      //Todo: check this
         voteAverage: Data["vote_average"]);
   }
 }
