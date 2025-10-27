@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dartz/dartz.dart';
+import 'package:movieapp/Core/Errors/ExceptionServer.dart';
 import 'package:movieapp/Features/Movies/Data/DataSource/RemoteDataSource.dart';
 import 'package:movieapp/Features/Movies/Domain/BaseRepository/BaseRepository.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
@@ -9,17 +11,32 @@ class Repositoryimplementation extends Baserepository {
     required this.baseDatasource,
   });
   @override
-  Future<List<Movie>> FetchGoodMovies() {
-    return baseDatasource.FetchGoodMovies();
+  Future<Either<Failur, List<Movie>>> FetchGoodMovies() async {
+    final Result = await baseDatasource.FetchGoodMovies();
+    try {
+      return right(Result);
+    } on Exceptionserver catch (e) {
+      return left(Failur(errormessage: e.errorModel.status_message));
+    }
   }
 
   @override
-  Future<List<Movie>> FetchNowPlayingMovies() {
-    return baseDatasource.FetchNowPlayingMovies();
+  Future<Either<Failur, List<Movie>>> FetchNowPlayingMovies() async {
+    final Result = await baseDatasource.FetchNowPlayingMovies();
+    try {
+      return right(Result);
+    } on Exceptionserver catch (e) {
+      return left(Failur(errormessage: e.errorModel.status_message));
+    }
   }
 
   @override
-  Future<List<Movie>> FetchPopularMovies() {
-    return baseDatasource.FetchPopularMovies();
+  Future<Either<Failur, List<Movie>>> FetchPopularMovies() async {
+    final Result = await baseDatasource.FetchPopularMovies();
+    try {
+      return right(Result);
+    } on Exceptionserver catch (e) {
+      return left(Failur(errormessage: e.errorModel.status_message));
+    }
   }
 }
