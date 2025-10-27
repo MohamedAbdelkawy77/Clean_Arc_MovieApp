@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:movieapp/Features/Movies/Data/DataSource/DataSource.dart';
+import 'package:movieapp/Features/Movies/Data/DataSource/RemoteDataSource.dart';
 import 'package:movieapp/Features/Movies/Domain/BaseRepository/BaseRepository.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
 
 class Repositoryimplementation extends Baserepository {
-  BaseDatasource baseDatasource;
+  BaseRemoteDatasource baseDatasource;
   Repositoryimplementation({
     required this.baseDatasource,
   });
