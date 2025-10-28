@@ -19,7 +19,8 @@ class RemoteDatasource implements BaseRemoteDatasource {
     final response = await http.get(url);
     final Map<String, dynamic> data = json.decode(response.body);
     if (response.statusCode == 200) {
-      final List<Map<String, dynamic>> results = data['results'];
+      final List<Map<String, dynamic>> results =
+          List<Map<String, dynamic>>.from(data['results']);
       return List<Movie>.from((results).map((e) => Moviemodel.fromJson(e)));
       // results.map((movieJson) => Moviemodel.fromJson(movieJson)).toList();
     } else {
@@ -35,8 +36,7 @@ class RemoteDatasource implements BaseRemoteDatasource {
     final response = await http.get(url);
     final data = json.decode(response.body);
     if (response.statusCode == 200) {
- 
-      final List<Map<String, dynamic>> results = data['results'];
+      final List<dynamic> results = data['results'];
       return results
           .map((movieJson) => Moviemodel.fromJson(movieJson))
           .toList();
@@ -53,7 +53,9 @@ class RemoteDatasource implements BaseRemoteDatasource {
     final response = await http.get(url);
     final data = json.decode(response.body);
     if (response.statusCode == 200) {
-      final List<Map<String, dynamic>> results = data['results'];
+      final List<Map<String, dynamic>> results = (data["results"] as List)
+          .map((e) => e as Map<String, dynamic>)
+          .toList();
       return results
           .map((movieJson) => Moviemodel.fromJson(movieJson))
           .toList();

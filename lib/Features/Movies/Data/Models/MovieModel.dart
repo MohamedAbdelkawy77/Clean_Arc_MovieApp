@@ -8,13 +8,12 @@ class Moviemodel extends Movie {
       required super.posterPath,
       required super.voteAverage});
 
-  factory Moviemodel.fromJson(Map<String,dynamic> Data) {
+  factory Moviemodel.fromJson(Map<String, dynamic> Data) {
     return Moviemodel(
         Id: Data["id"],
         Title: Data["title"],
         overview: Data["overview"],
         posterPath: Data["poster_path"],
-      //Todo: check this
-        voteAverage: Data["vote_average"]);
+        voteAverage: Data["vote_average"].toDouble());
   }
 }
