@@ -1,14 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:movieapp/Core/Networking/Constants.dart';
 import 'package:movieapp/Features/Movies/Presentation/Manager/MovieBloc/movie_bloc.dart';
+import 'package:movieapp/Features/Movies/Presentation/Widgets/ColumnoverthemainMovie.dart';
+import 'package:movieapp/Features/Movies/Presentation/Widgets/ListViewPopularMovies.dart';
+import 'package:movieapp/Features/Movies/Presentation/Widgets/ListViewofTopratedmovies.dart';
+import 'package:movieapp/Features/Movies/Presentation/Widgets/RowofTopratedMovies.dart';
+import 'package:movieapp/Features/Movies/Presentation/Widgets/RowofpopularMovieseemore.dart';
 //import 'package:movies_apps/core/network/api_constance.dart';
 //import 'package:movies_apps/movies/presentation/screens/dummy.dart';
-import 'package:shimmer/shimmer.dart';
+
 
 class MainMoviesScreen extends StatelessWidget {
   const MainMoviesScreen({Key? key}) : super(key: key);
@@ -70,43 +75,8 @@ class MainMoviesScreen extends StatelessWidget {
                               ),
                               Align(
                                 alignment: Alignment.bottomCenter,
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 16.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            Icons.circle,
-                                            color: Colors.redAccent,
-                                            size: 16.0,
-                                          ),
-                                          const SizedBox(width: 4.0),
-                                          Text(
-                                            'Now Playing'.toUpperCase(),
-                                            style: const TextStyle(
-                                              fontSize: 16.0,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 16.0),
-                                      child: Text(
-                                        item.Title,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontSize: 24,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                child: ColumnoverthemainMovie(
+                                  Title: item.Title,
                                 ),
                               ),
                             ],
@@ -118,82 +88,14 @@ class MainMoviesScreen extends StatelessWidget {
                 ),
                 Container(
                   margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Popular",
-                        style: GoogleFonts.poppins(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 0.15,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          /// TODO : NAVIGATION TO POPULAR SCREEN
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: const [
-                              Text('See More'),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 16.0,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: RowofpopularMovieseemore(),
                 ),
                 FadeIn(
                   duration: const Duration(milliseconds: 500),
                   child: SizedBox(
                     height: 170.0,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      itemCount: state.movies.length,
-                      itemBuilder: (context, index) {
-                        final movie = state.movies[index];
-                        return Container(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              /// TODO : NAVIGATE TO  MOVIE DETAILS
-                            },
-                            child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8.0)),
-                              child: CachedNetworkImage(
-                                width: 120.0,
-                                fit: BoxFit.cover,
-                                imageUrl: Constants.baseurlimage(
-                                    imagepath: movie.posterPath),
-                                placeholder: (context, url) =>
-                                    Shimmer.fromColors(
-                                  baseColor: Colors.grey[850]!,
-                                  highlightColor: Colors.grey[800]!,
-                                  child: Container(
-                                    height: 170.0,
-                                    width: 120.0,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                    child: ListViewofTopratedmovies(
+                      movies: state.movies,
                     ),
                   ),
                 ),
@@ -204,82 +106,14 @@ class MainMoviesScreen extends StatelessWidget {
                     16.0,
                     8.0,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Top Rated",
-                        style: GoogleFonts.poppins(
-                          fontSize: 19,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 0.15,
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          /// TODO : NAVIGATION TO Top Rated Movies Screen
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            children: const [
-                              Text('See More'),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                size: 16.0,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: RowofTopratedMovies(),
                 ),
                 FadeIn(
                   duration: const Duration(milliseconds: 500),
                   child: SizedBox(
                     height: 170.0,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      itemCount: state.movies.length,
-                      itemBuilder: (context, index) {
-                        final movie = state.movies[index];
-                        return Container(
-                          padding: const EdgeInsets.only(right: 8.0),
-                          child: InkWell(
-                            onTap: () {
-                              /// TODO : NAVIGATE TO  MOVIE DETAILS
-                            },
-                            child: ClipRRect(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(8.0)),
-                              child: CachedNetworkImage(
-                                width: 120.0,
-                                fit: BoxFit.cover,
-                                imageUrl: Constants.baseurlimage(
-                                    imagepath: movie.posterPath),
-                                placeholder: (context, url) =>
-                                    Shimmer.fromColors(
-                                  baseColor: Colors.grey[850]!,
-                                  highlightColor: Colors.grey[800]!,
-                                  child: Container(
-                                    height: 170.0,
-                                    width: 120.0,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                  ),
-                                ),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                    child: ListViewPopularMovies(
+                      movies: state.movies,
                     ),
                   ),
                 ),
@@ -304,3 +138,7 @@ class MainMoviesScreen extends StatelessWidget {
     );
   }
 }
+
+
+ 
+
