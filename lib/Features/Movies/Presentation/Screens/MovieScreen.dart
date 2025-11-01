@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/Core/Networking/GetIt.dart';
 import 'package:movieapp/Features/Movies/Presentation/Manager/MoodThemeCubit/MoodthemeCubit.dart';
 import 'package:movieapp/Features/Movies/Presentation/Manager/MovieBloc/movie_bloc.dart';
 import 'package:movieapp/Features/Movies/Presentation/Screens/main_movies_screen.dart';
@@ -13,9 +12,10 @@ class Moviescreen extends StatefulWidget {
 }
 
 class _MoviescreenState extends State<Moviescreen> {
-  @override
+ 
   @override
   Widget build(BuildContext context) {
+    print("main build");
     return BlocBuilder<Moodthemecubit, bool>(
       builder: (context, state) {
         return Scaffold(
@@ -31,7 +31,7 @@ class _MoviescreenState extends State<Moviescreen> {
             ),
             body: BlocProvider(
               create: (context) =>
-                  MovieBloc(getIt())..add(MovieEventNowPlaying()),
+                  MovieBloc()..add(MovieEventNowPlaying()),
               child: MainMoviesScreen(),
             ));
       },

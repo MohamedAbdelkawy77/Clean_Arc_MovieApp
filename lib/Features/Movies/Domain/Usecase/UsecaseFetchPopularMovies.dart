@@ -7,7 +7,7 @@ class Usecasefetchpopularmovies {
   final Baserepository baseRepository;
 
   Usecasefetchpopularmovies({required this.baseRepository});
-  Future<Either<Failur, List<Movie>>> movies() async{
+  Future<Either<Failur, List<Movie>>> execute() async{
     return await baseRepository.FetchPopularMovies();
   }
 }

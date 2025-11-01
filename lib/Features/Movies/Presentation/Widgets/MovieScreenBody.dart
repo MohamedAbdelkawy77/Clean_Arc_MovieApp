@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movieapp/Core/Networking/GetIt.dart';
 import 'package:movieapp/Features/Movies/Presentation/Manager/MovieBloc/movie_bloc.dart';
 
 class Moviescreenbody extends StatelessWidget {
@@ -10,8 +9,8 @@ class Moviescreenbody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        print(MovieBloc(getIt()).hashCode);
-        return MovieBloc(getIt())..add(MovieEventNowPlaying());
+        print(MovieBloc().hashCode);
+        return MovieBloc()..add(MovieEventNowPlaying());
       },
       child: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {

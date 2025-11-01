@@ -11,9 +11,6 @@ import 'package:movieapp/Features/Movies/Presentation/Widgets/ListViewPopularMov
 import 'package:movieapp/Features/Movies/Presentation/Widgets/ListViewofTopratedmovies.dart';
 import 'package:movieapp/Features/Movies/Presentation/Widgets/RowofTopratedMovies.dart';
 import 'package:movieapp/Features/Movies/Presentation/Widgets/RowofpopularMovieseemore.dart';
-//import 'package:movies_apps/core/network/api_constance.dart';
-//import 'package:movies_apps/movies/presentation/screens/dummy.dart';
-
 
 class MainMoviesScreen extends StatelessWidget {
   const MainMoviesScreen({Key? key}) : super(key: key);
@@ -22,6 +19,7 @@ class MainMoviesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MovieBloc, MovieState>(
       builder: (context, state) {
+        print("build");
         if (state is MovieLoading) {
           return Center(child: CircularProgressIndicator());
         } else if (state is MovieSuccess) {
@@ -138,7 +136,3 @@ class MainMoviesScreen extends StatelessWidget {
     );
   }
 }
-
-
- 
-
