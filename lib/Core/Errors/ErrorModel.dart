@@ -5,7 +5,7 @@ class Errormodel extends Equatable {
   final String status_message;
   final bool success;
 
-  Errormodel(
+  const Errormodel(
       {required this.status_code,
       required this.status_message,
       required this.success});

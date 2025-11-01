@@ -14,11 +14,11 @@ final class MovieLoading extends MovieState {}
 final class Moviefailur extends MovieState {
   final String failur;
 
-  Moviefailur({required this.failur});
+  const  Moviefailur({required this.failur});
 }
 
 final class MovieSuccess extends MovieState {
   final List<Movie> movies;
 
-  MovieSuccess({required this.movies});
+  const  MovieSuccess({required this.movies});
 }

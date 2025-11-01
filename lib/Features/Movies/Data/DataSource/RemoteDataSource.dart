@@ -13,6 +13,7 @@ abstract class BaseRemoteDatasource {
 }
 
 class RemoteDatasource implements BaseRemoteDatasource {
+  @override
   Future<List<Movie>> FetchNowPlayingMovies() async {
     final url = Uri.parse(
         "${Constants.BaseUrl}now_playing?api_key=${Constants.apikey}&language=en-US&page=1");

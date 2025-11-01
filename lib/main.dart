@@ -5,7 +5,7 @@ import 'package:movieapp/Core/Routing/Routing.dart';
 import 'package:movieapp/Features/Movies/Presentation/Manager/MoodThemeCubit/MoodthemeCubit.dart';
 
 void main() {
-  setup();
+  ServerLocator().init();
   runApp(BlocProvider(
     create: (context) => Moodthemecubit(),
     child: MovieApp(),
