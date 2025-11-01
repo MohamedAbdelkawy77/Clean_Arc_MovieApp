@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movieapp/Core/Networking/GetIt.dart';
 import 'package:movieapp/Features/Movies/Presentation/Manager/MoodThemeCubit/MoodthemeCubit.dart';
-import 'package:movieapp/Features/Movies/Presentation/Widgets/MovieScreenBody.dart';
+import 'package:movieapp/Features/Movies/Presentation/Manager/MovieBloc/movie_bloc.dart';
+import 'package:movieapp/Features/Movies/Presentation/Screens/main_movies_screen.dart';
 
 class Moviescreen extends StatefulWidget {
   const Moviescreen({super.key});
@@ -27,7 +29,11 @@ class _MoviescreenState extends State<Moviescreen> {
                         state ? Icon(Icons.light_mode) : Icon(Icons.dark_mode)),
               ],
             ),
-            body: Moviescreenbody());
+            body: BlocProvider(
+              create: (context) =>
+                  MovieBloc(getIt())..add(MovieEventNowPlaying()),
+              child: MainMoviesScreen(),
+            ));
       },
     );
   }
