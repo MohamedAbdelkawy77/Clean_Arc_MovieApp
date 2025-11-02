@@ -12,29 +12,31 @@ class Moviescreen extends StatefulWidget {
 }
 
 class _MoviescreenState extends State<Moviescreen> {
- 
   @override
   Widget build(BuildContext context) {
     print("main build");
-    return BlocBuilder<Moodthemecubit, bool>(
-      builder: (context, state) {
-        return Scaffold(
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                    onPressed: () {
-                      context.read<Moodthemecubit>().changeMood();
-                    },
-                    icon:
-                        state ? Icon(Icons.light_mode) : Icon(Icons.dark_mode)),
-              ],
-            ),
-            body: BlocProvider(
-              create: (context) =>
-                  MovieBloc()..add(MovieEventNowPlaying()),
-              child: MainMoviesScreen(),
-            ));
-      },
+    return BlocProvider(
+      create: (context) => MovieBloc()
+        ..add(MovieEventNowPlaying())
+        ..add(MovieEventPopularmovies())
+        ..add(MovieEventTopmovies()),
+      child: BlocBuilder<Moodthemecubit, bool>(
+        builder: (context, state) {
+          return Scaffold(
+              appBar: AppBar(
+                actions: [
+                  IconButton(
+                      onPressed: () {
+                        context.read<Moodthemecubit>().changeMood();
+                      },
+                      icon: state
+                          ? Icon(Icons.light_mode)
+                          : Icon(Icons.dark_mode)),
+                ],
+              ),
+              body: MainMoviesScreen());
+        },
+      ),
     );
   }
 }

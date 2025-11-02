@@ -7,4 +7,3 @@ class Constants {
   }
 }
 
-enum Movieenum { loading, loaded, isempty }

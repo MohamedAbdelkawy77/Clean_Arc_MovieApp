@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
- 
+
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:movieapp/Core/Networking/Constants.dart';
 import 'package:movieapp/Core/Networking/GetIt.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
 import 'package:movieapp/Features/Movies/Domain/Usecase/UsecaseFetchGood_Movies.dart';
@@ -13,32 +12,47 @@ part 'movie_event.dart';
 part 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
-  MovieBloc() : super(MovieLoading()) {
+  MovieBloc() : super(MovieState()) {
     on<MovieEventNowPlaying>((event, emit) async {
-      emit(MovieLoading());
       var Movies = await getIt<UsecasefetchnowPlayingmovie>().execute();
       Movies.fold((Failur) {
-        emit(Moviefailur(failur: Failur.errormessage));
+        emit(MovieState(
+            Category: MoviesCategory.nowplaying,
+            ErrorMessage: Failur.errormessage,
+            movieenumstate: Movieenumstate.isempty));
       }, (movies) {
-        emit(MovieSuccess(movies: movies));
+        emit(MovieState(
+            Category: MoviesCategory.nowplaying,
+            Movies: movies,
+            movieenumstate: Movieenumstate.loaded));
       });
     });
     on<MovieEventPopularmovies>((event, emit) async {
-      emit(MovieLoading());
       var Movies = await getIt<Usecasefetchpopularmovies>().execute();
       Movies.fold((Failur) {
-        emit(Moviefailur(failur: Failur.errormessage));
+        emit(MovieState(
+            Category: MoviesCategory.popular,
+            ErrorMessage: Failur.errormessage,
+            movieenumstate: Movieenumstate.isempty));
       }, (movies) {
-        emit(MovieSuccess(movies: movies));
+        emit(MovieState(
+            Category: MoviesCategory.popular,
+            Movies: movies,
+            movieenumstate: Movieenumstate.loaded));
       });
     });
-        on<MovieEventTopmovies>((event, emit) async {
-      emit(MovieLoading());
+    on<MovieEventTopmovies>((event, emit) async {
       var Movies = await getIt<UsecasefetchgoodMovies>().execute();
       Movies.fold((Failur) {
-        emit(Moviefailur(failur: Failur.errormessage));
+        emit(MovieState(
+            Category: MoviesCategory.toprated,
+            ErrorMessage: Failur.errormessage,
+            movieenumstate: Movieenumstate.isempty));
       }, (movies) {
-        emit(MovieSuccess(movies: movies));
+        emit(MovieState(
+            Category: MoviesCategory.toprated,
+            Movies: movies,
+            movieenumstate: Movieenumstate.loaded));
       });
     });
   }

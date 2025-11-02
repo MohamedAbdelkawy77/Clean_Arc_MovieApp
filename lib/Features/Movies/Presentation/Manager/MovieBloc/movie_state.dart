@@ -1,24 +1,36 @@
 part of 'movie_bloc.dart';
 
-sealed class MovieState extends Equatable {
-  const MovieState();
+class MovieState extends Equatable {
+  const MovieState(
+      {this.Movies = const [],
+      this.Category = MoviesCategory.noone,
+      this.ErrorMessage = "",
+      this.movieenumstate = Movieenumstate.loading});
+  final List<Movie> Movies;
+  final Movieenumstate movieenumstate;
+  final String ErrorMessage;
+  final MoviesCategory Category;
 
   @override
-  List<Object> get props => [];
+  List<Object> get props => [Movies, Category, ErrorMessage, movieenumstate];
 }
 
-final class MovieInitial extends MovieState {}
+enum Movieenumstate { loading, loaded, isempty }
 
-final class MovieLoading extends MovieState {}
+enum MoviesCategory {  noone, nowplaying, popular, toprated }
 
-final class Moviefailur extends MovieState {
-  final String failur;
+// final class MovieInitial extends MovieState {}
 
-  const  Moviefailur({required this.failur});
-}
+// final class MovieLoading extends MovieState {}
 
-final class MovieSuccess extends MovieState {
-  final List<Movie> movies;
+// final class Moviefailur extends MovieState {
+//   final String failur;
 
-  const  MovieSuccess({required this.movies});
-}
+//   const  Moviefailur({required this.failur});
+// }
+
+// final class MovieSuccess extends MovieState {
+//   final List<Movie> movies;
+
+//   const  MovieSuccess({required this.movies});
+// }
