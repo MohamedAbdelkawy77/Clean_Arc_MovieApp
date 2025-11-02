@@ -20,7 +20,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   void topratedmovies() {
     return on<MovieEventTopmovies>((event, emit) async {
-      var Movies = await getIt<UsecasefetchgoodMovies>().execute();
+      var Movies = await getIt<UsecasefetchgoodMovies>().call();
       Movies.fold((Failur) {
         emit(state.copyWith(
             Category: MoviesCategory.toprated,
@@ -37,7 +37,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   void moviespopular() {
     return on<MovieEventPopularmovies>((event, emit) async {
-      var Movies = await getIt<Usecasefetchpopularmovies>().execute();
+      var Movies = await getIt<Usecasefetchpopularmovies>().call();
       Movies.fold((Failur) {
         emit(state.copyWith(
             Category: MoviesCategory.popular,
@@ -54,7 +54,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   void moviesnowplaying() {
     return on<MovieEventNowPlaying>((event, emit) async {
-      var Movies = await getIt<UsecasefetchnowPlayingmovie>().execute();
+      var Movies = await getIt<UsecasefetchnowPlayingmovie>().call();
       Movies.fold((Failur) {
         emit(state.copyWith(
             Category: MoviesCategory.nowplaying,
