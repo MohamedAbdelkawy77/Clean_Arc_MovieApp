@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'movie_bloc.dart';
 
 class MovieState extends Equatable {
@@ -13,11 +14,25 @@ class MovieState extends Equatable {
 
   @override
   List<Object> get props => [Movies, Category, ErrorMessage, movieenumstate];
+
+  MovieState copyWith({
+    List<Movie>? Movies,
+    Movieenumstate? movieenumstate,
+    String? ErrorMessage,
+    MoviesCategory? Category,
+  }) {
+    return MovieState(
+      Movies: Movies ?? this.Movies,
+      movieenumstate: movieenumstate ?? this.movieenumstate,
+      ErrorMessage: ErrorMessage ?? this.ErrorMessage,
+      Category: Category ?? this.Category,
+    );
+  }
 }
 
 enum Movieenumstate { loading, loaded, isempty }
 
-enum MoviesCategory {  noone, nowplaying, popular, toprated }
+enum MoviesCategory { noone, nowplaying, popular, toprated }
 
 // final class MovieInitial extends MovieState {}
 

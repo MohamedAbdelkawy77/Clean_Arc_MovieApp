@@ -19,7 +19,7 @@ class MainMoviesScreen extends StatelessWidget {
           Fadeinstack(),
           Container(
             margin: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
-            child: RowofpopularMovieseemore(),
+            child: RowofTopratedMovies(),
           ),
           FadeInTopratedmovies(),
           Container(
@@ -29,7 +29,7 @@ class MainMoviesScreen extends StatelessWidget {
               16.0,
               8.0,
             ),
-            child: RowofTopratedMovies(),
+            child: RowofpopularMovieseemore(),
           ),
           Fadeinpopularmovies(),
           const SizedBox(height: 50.0),

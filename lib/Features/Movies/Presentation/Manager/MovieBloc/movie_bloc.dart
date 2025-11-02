@@ -13,44 +13,56 @@ part 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
   MovieBloc() : super(MovieState()) {
-    on<MovieEventNowPlaying>((event, emit) async {
-      var Movies = await getIt<UsecasefetchnowPlayingmovie>().execute();
-      Movies.fold((Failur) {
-        emit(MovieState(
-            Category: MoviesCategory.nowplaying,
-            ErrorMessage: Failur.errormessage,
-            movieenumstate: Movieenumstate.isempty));
-      }, (movies) {
-        emit(MovieState(
-            Category: MoviesCategory.nowplaying,
-            Movies: movies,
-            movieenumstate: Movieenumstate.loaded));
-      });
-    });
-    on<MovieEventPopularmovies>((event, emit) async {
-      var Movies = await getIt<Usecasefetchpopularmovies>().execute();
-      Movies.fold((Failur) {
-        emit(MovieState(
-            Category: MoviesCategory.popular,
-            ErrorMessage: Failur.errormessage,
-            movieenumstate: Movieenumstate.isempty));
-      }, (movies) {
-        emit(MovieState(
-            Category: MoviesCategory.popular,
-            Movies: movies,
-            movieenumstate: Movieenumstate.loaded));
-      });
-    });
-    on<MovieEventTopmovies>((event, emit) async {
+    moviesnowplaying();
+    moviespopular();
+    topratedmovies();
+  }
+
+  void topratedmovies() {
+    return on<MovieEventTopmovies>((event, emit) async {
       var Movies = await getIt<UsecasefetchgoodMovies>().execute();
       Movies.fold((Failur) {
-        emit(MovieState(
+        emit(state.copyWith(
             Category: MoviesCategory.toprated,
             ErrorMessage: Failur.errormessage,
             movieenumstate: Movieenumstate.isempty));
       }, (movies) {
-        emit(MovieState(
+        emit(state.copyWith(
             Category: MoviesCategory.toprated,
+            Movies: movies,
+            movieenumstate: Movieenumstate.loaded));
+      });
+    });
+  }
+
+  void moviespopular() {
+    return on<MovieEventPopularmovies>((event, emit) async {
+      var Movies = await getIt<Usecasefetchpopularmovies>().execute();
+      Movies.fold((Failur) {
+        emit(state.copyWith(
+            Category: MoviesCategory.popular,
+            ErrorMessage: Failur.errormessage,
+            movieenumstate: Movieenumstate.isempty));
+      }, (movies) {
+        emit(state.copyWith(
+            Category: MoviesCategory.popular,
+            Movies: movies,
+            movieenumstate: Movieenumstate.loaded));
+      });
+    });
+  }
+
+  void moviesnowplaying() {
+    return on<MovieEventNowPlaying>((event, emit) async {
+      var Movies = await getIt<UsecasefetchnowPlayingmovie>().execute();
+      Movies.fold((Failur) {
+        emit(state.copyWith(
+            Category: MoviesCategory.nowplaying,
+            ErrorMessage: Failur.errormessage,
+            movieenumstate: Movieenumstate.isempty));
+      }, (movies) {
+        emit(state.copyWith(
+            Category: MoviesCategory.nowplaying,
             Movies: movies,
             movieenumstate: Movieenumstate.loaded));
       });

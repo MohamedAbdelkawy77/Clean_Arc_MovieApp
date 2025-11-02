@@ -14,6 +14,7 @@ class Moviescreen extends StatefulWidget {
 class _MoviescreenState extends State<Moviescreen> {
   @override
   Widget build(BuildContext context) {
+    
     print("main build");
     return BlocProvider(
       create: (context) => MovieBloc()

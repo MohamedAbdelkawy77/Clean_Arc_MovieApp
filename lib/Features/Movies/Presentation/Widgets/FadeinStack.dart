@@ -12,15 +12,18 @@ class Fadeinstack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+  print("Fadeinstack");
     return BlocBuilder<MovieBloc, MovieState>(
-      buildWhen: (previous, current) => current.Category==MoviesCategory.nowplaying,
+      buildWhen: (previous, current) =>
+      current.Category == MoviesCategory.nowplaying,
+      // buildWhen: (prev, curr) => prev.movieenumstate != curr.movieenumstate,
       builder: (context, state) {
-        if (state.movieenumstate==Movieenumstate.loading) {
+        if (state.movieenumstate == Movieenumstate.loading) {
           return Center(
               child: CircularProgressIndicator(
             color: Colors.amber,
           ));
-        } else if (state.movieenumstate==Movieenumstate.loaded) {
+        } else if (state.movieenumstate == Movieenumstate.loaded) {
           return FadeIn(
             duration: const Duration(milliseconds: 500),
             child: CarouselSlider(
@@ -76,7 +79,7 @@ class Fadeinstack extends StatelessWidget {
               ).toList(),
             ),
           );
-        } else if (state.movieenumstate==Movieenumstate.isempty) {
+        } else if (state.movieenumstate == Movieenumstate.isempty) {
           return Center(
               child: Text(
             state.ErrorMessage,

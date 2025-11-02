@@ -9,8 +9,10 @@ class Fadeinpopularmovies extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Fadeinpopularmovies");
     return BlocBuilder<MovieBloc, MovieState>(
       buildWhen: (prev, curr) => curr.Category == MoviesCategory.popular,
+      //    buildWhen: (prev, curr) => prev.movieenumstate != curr.movieenumstate,
       builder: (context, state) {
         if (state.movieenumstate == Movieenumstate.loading) {
           return Center(
