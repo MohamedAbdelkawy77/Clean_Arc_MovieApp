@@ -5,7 +5,10 @@ class Gener extends Equatable {
   final int id;
 
   Gener({required this.name, required this.id});
+  factory Gener.fromJson(data) {
+    return Gener(name: data["name"], id: data["id"]);
+  }
 
   @override
-  List<Object?> get props => [name,id];
+  List<Object?> get props => [name, id];
 }

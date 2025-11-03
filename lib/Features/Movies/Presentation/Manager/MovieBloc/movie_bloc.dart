@@ -3,6 +3,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movieapp/Core/Networking/GetIt.dart';
+import 'package:movieapp/Core/Usecase/Baseusecase.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
 import 'package:movieapp/Features/Movies/Domain/Usecase/UsecaseFetchGood_Movies.dart';
 import 'package:movieapp/Features/Movies/Domain/Usecase/UsecaseFetchNow_PlayingMovie.dart';
@@ -20,7 +21,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   void topratedmovies() {
     return on<MovieEventTopmovies>((event, emit) async {
-      var Movies = await getIt<UsecasefetchgoodMovies>().call();
+      var Movies = await getIt<UsecasefetchgoodMovies>().call(Noparameter());
       Movies.fold((Failur) {
         emit(state.copyWith(
             Category: MoviesCategory.toprated,
@@ -37,7 +38,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   void moviespopular() {
     return on<MovieEventPopularmovies>((event, emit) async {
-      var Movies = await getIt<Usecasefetchpopularmovies>().call();
+      var Movies = await getIt<Usecasefetchpopularmovies>().call(Noparameter());
       Movies.fold((Failur) {
         emit(state.copyWith(
             Category: MoviesCategory.popular,
@@ -54,7 +55,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
 
   void moviesnowplaying() {
     return on<MovieEventNowPlaying>((event, emit) async {
-      var Movies = await getIt<UsecasefetchnowPlayingmovie>().call();
+      var Movies = await getIt<UsecasefetchnowPlayingmovie>().call(Noparameter());
       Movies.fold((Failur) {
         emit(state.copyWith(
             Category: MoviesCategory.nowplaying,

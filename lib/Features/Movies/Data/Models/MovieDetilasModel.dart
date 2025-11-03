@@ -1,4 +1,5 @@
 import 'package:movieapp/Features/Movies/Domain/Entities/MovieDetails.dart';
+import 'package:movieapp/Features/Movies/Domain/Entities/geners.dart';
 
 class Moviedetilsmodel extends MovieDetail {
   Moviedetilsmodel(
@@ -10,10 +11,11 @@ class Moviedetilsmodel extends MovieDetail {
       required super.runtime,
       required super.title,
       required super.voteAverage});
-  factory Moviedetilsmodel.tpJson(Map<String, dynamic> data) {
+  factory Moviedetilsmodel.fromJson(Map<String, dynamic> data) {
     return Moviedetilsmodel(
         backdropPath: data["backdrop_path"],
-        genreIds: data["genres"],
+        genreIds:
+            List<Gener>.from((data["genres"] as List).map((x) => Gener.fromJson(x))),
         id: data["id"],
         overview: data["overview"],
         releaseDate: data["release_date"],

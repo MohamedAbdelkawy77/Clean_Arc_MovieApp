@@ -5,6 +5,7 @@ import 'package:movieapp/Features/Movies/Domain/BaseRepository/BaseRepository.da
 import 'package:movieapp/Features/Movies/Domain/Usecase/UsecaseFetchGood_Movies.dart';
 import 'package:movieapp/Features/Movies/Domain/Usecase/UsecaseFetchNow_PlayingMovie.dart';
 import 'package:movieapp/Features/Movies/Domain/Usecase/UsecaseFetchPopularMovies.dart';
+import 'package:movieapp/Features/Movies/Domain/Usecase/UsecaseMoviedetials.dart';
 
 final getIt = GetIt.instance;
 
@@ -17,13 +18,17 @@ final getIt = GetIt.instance;
 
 class ServerLocator {
   void init() {
+    getIt.registerLazySingleton<Usecasemoviedetials>(() {
+      return Usecasemoviedetials(baserepository: getIt());
+    });
+
     getIt.registerLazySingleton<UsecasefetchnowPlayingmovie>(() {
       return UsecasefetchnowPlayingmovie(baseRepository: getIt());
     });
-      getIt.registerLazySingleton<UsecasefetchgoodMovies>(() {
+    getIt.registerLazySingleton<UsecasefetchgoodMovies>(() {
       return UsecasefetchgoodMovies(baseRepository: getIt());
     });
-      getIt.registerLazySingleton<Usecasefetchpopularmovies>(() {
+    getIt.registerLazySingleton<Usecasefetchpopularmovies>(() {
       return Usecasefetchpopularmovies(baseRepository: getIt());
     });
     getIt.registerLazySingleton<Baserepository>(() {

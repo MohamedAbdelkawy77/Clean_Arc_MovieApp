@@ -4,6 +4,7 @@ import 'package:movieapp/Core/Errors/ExceptionServer.dart';
 import 'package:movieapp/Features/Movies/Data/DataSource/RemoteDataSource.dart';
 import 'package:movieapp/Features/Movies/Domain/BaseRepository/BaseRepository.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
+import 'package:movieapp/Features/Movies/Domain/Entities/MovieDetails.dart';
 
 class Repositoryimplementation extends Baserepository {
   BaseRemoteDatasource baseDatasource;
@@ -38,5 +39,22 @@ class Repositoryimplementation extends Baserepository {
     } on Exceptionserver catch (e) {
       return left(Failur(errormessage: e.errorModel.status_message));
     }
+  }
+
+  @override
+  Future<Either<Failur, MovieDetail>> getmoviedetails({required int id}) async {
+    MovieDetail movieDetail = await baseDatasource.getMoviedetils(id);
+    try {
+      return right(movieDetail);
+    } on Exceptionserver catch (e) {
+      return left(Failur(errormessage: e.errorModel.status_message));
+    }
+  }
+
+  @override
+  Future<Either<Failur, List<MovieDetail>>> getmoviesrecommended(
+      {required int id}) {
+    // TODO: implement getmoviesrecommended
+    throw UnimplementedError();
   }
 }

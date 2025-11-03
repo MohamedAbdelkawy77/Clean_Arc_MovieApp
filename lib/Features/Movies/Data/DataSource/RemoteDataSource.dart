@@ -2,14 +2,17 @@ import 'dart:convert';
 import 'package:movieapp/Core/Errors/ErrorModel.dart';
 import 'package:movieapp/Core/Errors/ExceptionServer.dart';
 import 'package:movieapp/Core/Networking/Constants.dart';
+import 'package:movieapp/Features/Movies/Data/Models/MovieDetilasModel.dart';
 import 'package:movieapp/Features/Movies/Data/Models/MovieModel.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
 import 'package:http/http.dart' as http;
+import 'package:movieapp/Features/Movies/Domain/Entities/MovieDetails.dart';
 
 abstract class BaseRemoteDatasource {
   Future<List<Movie>> FetchNowPlayingMovies();
   Future<List<Movie>> FetchPopularMovies();
   Future<List<Movie>> FetchGoodMovies();
+  Future<MovieDetail> getMoviedetils(int id);
 }
 
 class RemoteDatasource implements BaseRemoteDatasource {
@@ -60,6 +63,20 @@ class RemoteDatasource implements BaseRemoteDatasource {
       return results
           .map((movieJson) => Moviemodel.fromJson(movieJson))
           .toList();
+    } else {
+      Errormodel errormodel = Errormodel.fromJson(data);
+      throw Exceptionserver(errorModel: errormodel);
+    }
+  }
+
+  @override
+  Future<MovieDetail> getMoviedetils(int id) async {
+    final url = Uri.parse("${Constants.baseurlMoviedetails(id)}");
+    final response = await http.get(url);
+    final data = json.decode(response.body);
+    if (response.statusCode == 200) {
+      final MovieDetail results = Moviedetilsmodel.fromJson(data);
+      return results;
     } else {
       Errormodel errormodel = Errormodel.fromJson(data);
       throw Exceptionserver(errorModel: errormodel);

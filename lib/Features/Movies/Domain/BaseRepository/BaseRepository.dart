@@ -1,11 +1,14 @@
 import 'package:dartz/dartz.dart';
 import 'package:movieapp/Core/Errors/ExceptionServer.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
+import 'package:movieapp/Features/Movies/Domain/Entities/MovieDetails.dart';
 
 abstract class Baserepository {
   Future<Either<Failur, List<Movie>>> FetchNowPlayingMovies();
-  Future<Either<Failur, List<Movie>>>FetchPopularMovies();
+  Future<Either<Failur, List<Movie>>> FetchPopularMovies();
   Future<Either<Failur, List<Movie>>> FetchGoodMovies();
+  Future<Either<Failur, MovieDetail>> getmoviedetails({required int id});
+  Future<Either<Failur, List<MovieDetail>>> getmoviesrecommended({required  int id});
 }
 
 // Movie moviemodel1 = Moviemodel(
