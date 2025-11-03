@@ -1,21 +1,28 @@
-import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
-import 'package:movieapp/Features/Movies/Presentation/Screens/MovieScreen.dart';
-import 'package:movieapp/Features/Movies/Presentation/Screens/main_movies_screen.dart';
+// import 'package:flutter/cupertino.dart';
+// import 'package:go_router/go_router.dart';
+// import 'package:movieapp/Features/Movies/Presentation/Screens/MovieScreen.dart';
+// import 'package:movieapp/Features/Movies/Presentation/Screens/MoviedetailsScreen.dart';
+// import 'package:movieapp/Features/Movies/Presentation/Screens/main_movies_screen.dart';
 
-final GoRouter router = GoRouter(
-  routes: [
-    GoRoute(
-      path: "/",
-      builder: (BuildContext context, GoRouterState state) {
-        return const Moviescreen();
-      },
-    ),
-    GoRoute(
-      path: MainMoviesScreen.id,
-      builder: (BuildContext context, GoRouterState state) {
-        return const MainMoviesScreen();
-      },
-    ),
-  ],
-);
+// final GoRouter router = GoRouter(
+//   routes: [
+//     GoRoute(
+//       path: "/",
+//       builder: (BuildContext context, GoRouterState state) {
+//         return const Moviescreen();
+//       },
+//     ),
+//     GoRoute(
+//       path: MainMoviesScreen.id,
+//       builder: (BuildContext context, GoRouterState state) {
+//         return const MainMoviesScreen();
+//       },
+//     ),
+//         GoRoute(
+//       path: Moviedetailsscreen.Id,
+//       builder: (BuildContext context, GoRouterState state) {
+//         return const Moviedetailsscreen(id:10 ,);
+//       },
+//     ),
+//   ],
+// );

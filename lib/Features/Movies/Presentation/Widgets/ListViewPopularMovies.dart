@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movieapp/Core/Networking/Constants.dart';
 import 'package:movieapp/Features/Movies/Domain/Entities/Movie.dart';
+import 'package:movieapp/Features/Movies/Presentation/Screens/MoviedetailsScreen.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ListViewPopularMovies extends StatelessWidget {
@@ -24,6 +25,9 @@ class ListViewPopularMovies extends StatelessWidget {
           child: InkWell(
             onTap: () {
               /// TODO : NAVIGATE TO  MOVIE DETAILS
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return Moviedetailsscreen(id: movie.Id);
+              }));
             },
             child: ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(8.0)),
